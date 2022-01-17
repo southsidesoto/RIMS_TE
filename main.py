@@ -118,7 +118,7 @@ re_onion = ""
 re_tomato = ""
 re_salt = 122.75
 
-burgers_daily = [50, 48, 50, 28, 57, 53, 69]
+
 #Stock Subtraction (Hamburgers)
 def stock_sub_ham(burgers_daily, hamburger, stock_buns, stock_meat,stock_salt):
   global leftover_buns
@@ -153,15 +153,15 @@ def stock_sub_ham(burgers_daily, hamburger, stock_buns, stock_meat,stock_salt):
     # print(stock_salt)
     burgers_daily.pop(0)
   
-  print("Leftover Stock Buns")
-  print(stock_buns)
-  leftover_buns = stock_buns
-  print("Leftover Stock Meat")
-  print(stock_meat)
-  leftover_meat = stock_meat
-  print("Leftover Stock Salt")
-  print(stock_salt)
-  leftover_salt = stock_salt
+  # print("Leftover Stock Buns")
+  # print(stock_buns)
+    leftover_buns = stock_buns
+  # print("Leftover Stock Meat")
+  # print(stock_meat)
+    leftover_meat = stock_meat
+  # print("Leftover Stock Salt")
+  # print(stock_salt)
+    leftover_salt = stock_salt
   
   return(leftover_buns, leftover_meat, leftover_salt)
 
@@ -176,21 +176,158 @@ def restock_check(current_stock, restock_amount):
   else:
     print("Stock is sufficient.")
 
+###Random Program###
+def random_customer_orders():
+  global burgers_daily
+  global cheese_daily
+  global spag_daily
+  choice1 = "hamburger"
+  choice2 = "cheeseburger"
+  choice3 = "spag_n_meat"
+  choice_list = [choice1, choice2, choice3]
+#The visits were based off a google search for average customers a day
+  customer_orders = []
+  customer_weekly = []
+#This list will list days in groups of three (ham, cheese, spag)
+  orders_daily = []
+  burgers_daily = []
+  cheese_daily = []
+  spag_daily = []
 
+  while len(customer_weekly) < 7:
+    customer_visits = random.randint(100,250)
+  #instead of doing it day to day, generate 7 days right off the bat, then randomize the orders with the code you used originally. your problem is making a list of 7 random counts
+    customer_weekly.append(customer_visits) 
+    while customer_visits > 0:
+      customer_orders.append(random.choice(choice_list))
+      customer_visits = customer_visits - 1
+    orders_daily.append("Day:" + str(len(customer_weekly)))
+  #print(len(customer_orders))
+  #print("# of Hamburgers")
+  #print(customer_orders.count(choice1))
+    burgers_daily.append(customer_orders.count(choice1))
+  #print("# of Cheeseburgers")
+  #print(customer_orders.count(choice2))
+    cheese_daily.append(customer_orders.count(choice2))
+  #print("Spaghetti and Meatballs")
+  #print(customer_orders.count(choice3))
+    spag_daily.append(customer_orders.count(choice3))
+  #need to clear customer_orders list at the end of each iteration
+  #print("Totals Daily:")
+  #print(len(customer_orders))
+    customer_orders.clear()
+  
+#   print("Weekly Customer Visits")
+#   print(customer_weekly)
+#   print()
+#   print("According to the data presented, the average number of customers per day is: " + str(int(sum(customer_weekly, 0)/7)) + ".")
+ 
+# #Day One
+#   print("Day 1:")
+#   print("H  C  S")
+#   print(burgers_daily[0] , cheese_daily[0] , spag_daily[0])
+#   print()
+# #Day Two
+#   print("Day 2:")
+#   print("H  C  S")
+#   print(burgers_daily[1] , cheese_daily[1] , spag_daily[1])
+#   print()
+# #Day three
+#   print("Day 3:")
+#   print("H  C  S")
+#   print(burgers_daily[2] , cheese_daily[2] , spag_daily[2])
+#   print()
+# #Day Four
+#   print("Day 4:")
+#   print("H  C  S")
+#   print(burgers_daily[3] , cheese_daily[3] , spag_daily[3])
+#   print()
+# #Day Five
+#   print("Day 5:")
+#   print("H  C  S")
+#   print(burgers_daily[4] , cheese_daily[4] , spag_daily[4])
+#   print()
+# #Day Six
+#   print("Day 6:")
+#   print("H  C  S")
+#   print(burgers_daily[5] , cheese_daily[5] , spag_daily[5])
+#   print()
+# #Day Seven
+#   print("Day 7:")
+#   print("H  C  S")
+#   print(burgers_daily[6] , cheese_daily[6] , spag_daily[6])
+
+#   print("Average Hamburgers Ordered Daily")
+#   print(round(sum(burgers_daily)/7))
+#   print("Total Hamburgers Ordered Weekly")
+#   print(sum(burgers_daily, 0))
+#   print()
+
+#   print("Average Cheeseburgers Ordered Daily")
+#   print(round(sum(cheese_daily)/7))
+#   print("Total Cheeseburgers Ordered Weekly")
+#   print(sum(cheese_daily, 0))
+#   print()
+
+#   print("Average Spaghetti Ordered Daily")
+#   print(round(sum(spag_daily)/7))
+#   print("Total Spaghetti Ordered Weekly")
+#   print(sum(spag_daily, 0))
+### What will be returned to the program?
+  return (burgers_daily, cheese_daily, spag_daily)
+'''After running the program, we will operate under the assumption that 175 is the global average for our branch.'''
+
+print("--------------------------------")
+print("THIS IS WHERE THE PROGRAM BEGINS")
+print("--------------------------------")
+print()
+print("Initiating Randomization Program...")
+print()
+random_customer_orders()
+print("--------------------------")
+print("MEALS ORDERED FOR THE WEEK")
+print("--------------------------")
+print("Burgers:")
+print(burgers_daily)
+print("Cheese Burgers")
+print(cheese_daily)
+print("Spaghetti N' Meatballs")
+print(spag_daily)
+print()
+print("--------------")
+print("CHECKING STOCK")
+print("--------------")
 stock_sub_ham(burgers_daily, hamburger, stock_buns, stock_meat,stock_salt)
+print()
+print("----------------------")
+print("SUBTRACTION INITIATING")
+print("----------------------")
+print("Starting Stock")
 print(stock_buns, stock_meat, stock_salt) 
+print("Stock Depleted")
+print((stock_buns - leftover_buns),(stock_meat - leftover_meat), (stock_salt - leftover_salt))
+print("New Stock")
 print(leftover_buns, leftover_meat, leftover_salt)
 stock_buns = leftover_buns
 stock_meat = leftover_meat
 stock_salt = leftover_salt
-print(stock_buns, stock_meat, stock_salt) 
+
+print()
+print("-------------")
+print("RESTOCK CHECK")
+print("-------------")
 restock_check(stock_buns, re_buns)
 
-burgers_daily = [50, 48, 50, 28, 57, 53, 69]
-stock_sub_ham(burgers_daily, hamburger, stock_buns, stock_meat,stock_salt)
-stock_buns = leftover_buns
-stock_meat = leftover_meat
-stock_salt = leftover_salt
+# stock_sub_ham(burgers_daily, hamburger, stock_buns, stock_meat,stock_salt)
+# stock_buns = leftover_buns
+# stock_meat = leftover_meat
+# stock_salt = leftover_salt
 
-print(stock_buns, stock_meat, stock_salt) 
-restock_check(stock_buns, re_buns)
+# print(stock_buns, stock_meat, stock_salt) 
+# restock_check(stock_buns, re_buns)
+
+
+#program works by the week, but make sure to add user input so that the program can run based off of choice. 
+#May also need to adjust a day-to-day code that can check more specifically when to put in a restock order.
+#for example: LOOP 
+###run a check for the list[0] orders. restock where needed, .pop the list[0], then run it again. Print out the ingredient supply, maybe list the percentage of ingredient left, and in the restock statement, say what was ordered for restock.
