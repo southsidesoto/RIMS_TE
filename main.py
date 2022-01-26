@@ -78,7 +78,7 @@ stock_salt = 612.5
 
 #Establishing Entree Lists
 hamburger = [buns, patty, salt]
-cheeseburger = [buns, patty, salt, cheese, onion, lettuce, tomato]
+cheeseburger = [buns, patty, salt, cheese]
 spag_n_meat = [spaghetti, salt, sauce, meatball]
 
 #Establishing Side Lists
@@ -103,7 +103,7 @@ re_spaghetti = 1875/5
 re_sauce = 300/5
 re_potato = 50/5
 re_macaroni = 2250/5
-re_lettuce = 
+re_lettuce = ""
 re_carrot = ""
 re_crouton = ""
 re_onion = ""
@@ -159,8 +159,55 @@ def stock_sub_ham(burgers_daily, hamburger, stock_buns, stock_meat,stock_salt):
 
 
 #Stock Subtraction (Cheeseburgers)
-def stock_sub_cheese(): 
-  print("")
+def stock_sub_cheese(cheese_daily, cheeseburger, stock_buns, stock_meat, stock_salt, stock_cheese): 
+  global leftover_buns
+  global leftover_meat
+  global leftover_salt
+  global leftover_cheese
+  print("Starting Stock Buns by Bun")
+  print(stock_buns)
+  print("Starting Stock Meat by Pound")
+  print(stock_meat)
+  print("Starting Stock Salt by Ounce")
+  print(stock_salt)
+  print("Starting Cheese by Slice")
+  print(stock_salt)
+
+  while len(cheese_daily) > 0:
+    buns_used = cheeseburger[0] * cheese_daily[0]
+    meat_used = cheeseburger[1] * cheese_daily[0]
+    salt_used = cheeseburger[2] * cheese_daily[0]
+    cheese_used = cheeseburger[3] * cheese_daily[0]
+    #print("Buns Used:")
+    #print(buns_used)
+    #print("Meat Used:")
+    # print(meat_used)
+    # print("Salt Used:")
+    # print(salt_used)
+    stock_buns = stock_buns - buns_used
+    stock_meat = stock_meat - meat_used
+    stock_salt = stock_salt - salt_used
+    stock_cheese = stock_cheese - cheese_used
+    # print("Bun Stock")
+    # print(stock_buns)
+    # print("Meat Stock")
+    # print(stock_meat)
+    # print("Salt Stock")
+    # print(stock_salt)
+    cheese_daily.pop(0)
+  
+  # print("Leftover Stock Buns")
+  # print(stock_buns)
+    leftover_buns = stock_buns
+  # print("Leftover Stock Meat")
+  # print(stock_meat)
+    leftover_meat = stock_meat
+  # print("Leftover Stock Salt")
+  # print(stock_salt)
+    leftover_salt = stock_salt
+    leftover_cheese = stock_cheese
+  
+  return(leftover_buns, leftover_meat, leftover_salt, leftover_cheese)
 
 def restock_check(current_stock, restock_amount):
   if current_stock < restock_amount:
@@ -208,68 +255,53 @@ def random_customer_orders():
   #print("Totals Daily:")
   #print(len(customer_orders))
     customer_orders.clear()
-  
-#   print("Weekly Customer Visits")
-#   print(customer_weekly)
-#   print()
-#   print("According to the data presented, the average number of customers per day is: " + str(int(sum(customer_weekly, 0)/7)) + ".")
  
-# #Day One
-#   print("Day 1:")
-#   print("H  C  S")
-#   print(burgers_daily[0] , cheese_daily[0] , spag_daily[0])
-#   print()
-# #Day Two
-#   print("Day 2:")
-#   print("H  C  S")
-#   print(burgers_daily[1] , cheese_daily[1] , spag_daily[1])
-#   print()
-# #Day three
-#   print("Day 3:")
-#   print("H  C  S")
-#   print(burgers_daily[2] , cheese_daily[2] , spag_daily[2])
-#   print()
-# #Day Four
-#   print("Day 4:")
-#   print("H  C  S")
-#   print(burgers_daily[3] , cheese_daily[3] , spag_daily[3])
-#   print()
-# #Day Five
-#   print("Day 5:")
-#   print("H  C  S")
-#   print(burgers_daily[4] , cheese_daily[4] , spag_daily[4])
-#   print()
-# #Day Six
-#   print("Day 6:")
-#   print("H  C  S")
-#   print(burgers_daily[5] , cheese_daily[5] , spag_daily[5])
-#   print()
-# #Day Seven
-#   print("Day 7:")
-#   print("H  C  S")
-#   print(burgers_daily[6] , cheese_daily[6] , spag_daily[6])
-
-#   print("Average Hamburgers Ordered Daily")
-#   print(round(sum(burgers_daily)/7))
-#   print("Total Hamburgers Ordered Weekly")
-#   print(sum(burgers_daily, 0))
-#   print()
-
-#   print("Average Cheeseburgers Ordered Daily")
-#   print(round(sum(cheese_daily)/7))
-#   print("Total Cheeseburgers Ordered Weekly")
-#   print(sum(cheese_daily, 0))
-#   print()
-
-#   print("Average Spaghetti Ordered Daily")
-#   print(round(sum(spag_daily)/7))
-#   print("Total Spaghetti Ordered Weekly")
-#   print(sum(spag_daily, 0))
-### What will be returned to the program?
   return (burgers_daily, cheese_daily, spag_daily)
 '''After running the program, we will operate under the assumption that 175 is the global average for our branch.'''
 
 #Testing out the program and UX design
+# print("--------------------------------")
+# print("THIS IS WHERE THE PROGRAM BEGINS")
+# print("--------------------------------")
+# print()
+# print("Initiating Randomization Program...")
+# print()
+# random_customer_orders()
+# print("--------------------------")
+# print("MEALS ORDERED FOR THE WEEK")
+# print("--------------------------")
+# print("Burgers:")
+# print(burgers_daily)
+# print("Cheese Burgers")
+# print(cheese_daily)
+# print("Spaghetti N' Meatballs")
+# print(spag_daily)
+# print()
+# print("--------------")
+# print("CHECKING STOCK")
+# print("--------------")
+# stock_sub_ham(burgers_daily, hamburger, stock_buns, stock_meat,stock_salt)
+# print()
+# print("----------------------")
+# print("SUBTRACTION INITIATING")
+# print("----------------------")
+# print("Starting Stock")
+# print(stock_buns, stock_meat, stock_salt) 
+# print("Stock Depleted")
+# print((stock_buns - leftover_buns),(stock_meat - leftover_meat), (stock_salt - leftover_salt))
+# print("New Stock")
+# print(leftover_buns, leftover_meat, leftover_salt)
+# stock_buns = leftover_buns
+# stock_meat = leftover_meat
+# stock_salt = leftover_salt
+
+# print()
+# print("-------------")
+# print("RESTOCK CHECK")
+# print("-------------")
+# restock_check(stock_buns, re_buns)
+
+###Testing Out CheeseBurger Function
 print("--------------------------------")
 print("THIS IS WHERE THE PROGRAM BEGINS")
 print("--------------------------------")
@@ -290,35 +322,27 @@ print()
 print("--------------")
 print("CHECKING STOCK")
 print("--------------")
-stock_sub_ham(burgers_daily, hamburger, stock_buns, stock_meat,stock_salt)
+stock_sub_cheese(cheese_daily, cheeseburger, stock_buns, stock_meat, stock_salt, stock_cheese)
 print()
 print("----------------------")
 print("SUBTRACTION INITIATING")
 print("----------------------")
 print("Starting Stock")
-print(stock_buns, stock_meat, stock_salt) 
+print(stock_buns, stock_meat, stock_salt, stock_cheese) 
 print("Stock Depleted")
-print((stock_buns - leftover_buns),(stock_meat - leftover_meat), (stock_salt - leftover_salt))
+print((stock_buns - leftover_buns),(stock_meat - leftover_meat), (stock_salt - leftover_salt), (stock_cheese - leftover_cheese))
 print("New Stock")
-print(leftover_buns, leftover_meat, leftover_salt)
+print(leftover_buns, leftover_meat, leftover_salt, leftover_cheese)
 stock_buns = leftover_buns
 stock_meat = leftover_meat
 stock_salt = leftover_salt
+stock_cheese = leftover_cheese
 
 print()
 print("-------------")
 print("RESTOCK CHECK")
 print("-------------")
 restock_check(stock_buns, re_buns)
-
-# stock_sub_ham(burgers_daily, hamburger, stock_buns, stock_meat,stock_salt)
-# stock_buns = leftover_buns
-# stock_meat = leftover_meat
-# stock_salt = leftover_salt
-
-# print(stock_buns, stock_meat, stock_salt) 
-# restock_check(stock_buns, re_buns)
-
 
 #program works by the week, but make sure to add user input so that the program can run based off of choice. 
 #May also need to adjust a day-to-day code that can check more specifically when to put in a restock order.
